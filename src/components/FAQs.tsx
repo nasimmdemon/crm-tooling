@@ -1,58 +1,63 @@
-"use client"
+"use client";
 import { useState } from "react";
 import PlusIcon from "../assets/icons/plus.svg";
 import MinusIcon from "../assets/icons/minus.svg";
 import clsx from "clsx";
-import {motion , AnimatePresence} from 'framer-motion';
+import { motion, AnimatePresence } from "framer-motion";
 const items = [
   {
-    question: "What payment methods do you accept?",
+    question: "What is crmtooling.com?",
     answer:
-      "We accept all major credit cards, PayPal, and various other payment methods depending on your location. Please contact our support team for more information on accepted payment methods in your region.",
+      "crmtooling.com is a comprehensive CRM application designed to help businesses efficiently manage customer relationships. With features like detailed customer profiles, filtering, bulk actions, and secure data storage, crmtooling.com streamlines customer interactions and record-keeping.",
   },
   {
-    question: "How does the pricing work for teams?",
+    question: "How secure is my data on crmtooling.com?",
     answer:
-      "Our pricing is per user, per month. This means you only pay for the number of team members you have on your account. Discounts are available for larger teams and annual subscriptions.",
+      "Your data’s security is our top priority. crmtooling.com uses advanced security measures to ensure that all information is stored and managed safely, keeping your customer data private and protected.",
   },
   {
-    question: "Can I change my plan later?",
+    question: "Can I customize the fields in customer profiles?",
     answer:
-      "Yes, you can upgrade or downgrade your plan at any time. Changes to your plan will be prorated and reflected in your next billing cycle.",
+      "Yes! crmtooling.com allows you to add custom fields to tailor customer profiles to your business needs. This feature ensures flexibility for various types of customer data beyond the default fields.",
   },
   {
-    question: "Is my data secure?",
+    question: "Does crmtooling.com support bulk actions?",
     answer:
-      "Security is our top priority. We use state-of-the-art encryption and comply with the best industry practices to ensure that your data is stored securely and accessed only by authorized users.",
+      "Absolutely. You can select multiple customers at once to perform actions such as updating statuses, applying tags, or managing notifications. This helps you work more efficiently, especially with larger customer databases.",
   },
 ];
 
-const AccordinationItem = ({question, answer}:{question:string, answer: string}) => {
-  const[isOpen, setIsOpen] = useState(false);
-  return(
-   
-    <div className=" py-7 border-b border-white/30" onClick={() => setIsOpen(!isOpen)}>
-    <div className="flex items-center ">
-      <span className="flex-1 text-lg font-bold">{question}</span>
-      {isOpen ? <MinusIcon /> :<PlusIcon />}
-      
+const AccordinationItem = ({
+  question,
+  answer,
+}: {
+  question: string;
+  answer: string;
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div
+      className=" py-7 border-b border-white/30"
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      <div className="flex items-center ">
+        <span className="flex-1 text-lg font-bold">{question}</span>
+        {isOpen ? <MinusIcon /> : <PlusIcon />}
       </div>
       <AnimatePresence>
-      {isOpen && (
-        <motion.div 
-        initial={{opacity: 0, height: 0, marginTop: 0}}
-        animate={{opacity: 1, height: "auto" , marginTop:'16px'}}
-        exit={{opacity: 0, height: 0, marginTop: 0}}
-          >{answer}</motion.div>
-
-      )}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+            animate={{ opacity: 1, height: "auto", marginTop: "16px" }}
+            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+          >
+            {answer}
+          </motion.div>
+        )}
       </AnimatePresence>
-    
-  </div>
-  
-    
-  )
-}
+    </div>
+  );
+};
 
 export const FAQs = () => {
   return (
@@ -62,11 +67,15 @@ export const FAQs = () => {
           Frequently Asked Questions
         </h2>
         <div className="mt-12 max-w-[648px] mx-auto">
-         {items.map(({question, answer}) => (
-            <AccordinationItem question={question} answer={answer} key={question}/>
-         ))}
+          {items.map(({ question, answer }) => (
+            <AccordinationItem
+              question={question}
+              answer={answer}
+              key={question}
+            />
+          ))}
         </div>
       </div>
     </div>
-  )
+  );
 };
